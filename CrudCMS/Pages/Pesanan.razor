@@ -1,0 +1,101 @@
+﻿@page "/pesanan"
+@page "/pesanan/{idPesananEdit:int}"
+
+@using CrudLibrary;
+@using CrudCMS.Services;
+@inject IPesananService pesananService;
+@inject IMenuMakananService menumakananService;
+@inject NavigationManager navigation;
+
+<h3>@title</h3>
+
+<EditForm Model="pesanan" OnInvalidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+
+    <div class="mb-3">
+        <label class="form-label">No. Pesanan</label>
+        <InputText class="form-control" @bind-Value="pesanan.NoPesanan"></InputText>
+        <ValidationMessage For="@(() => pesanan.NoPesanan)"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Tanggal Pesanan</label>
+        <InputDate class="form-control" @bind-Value="pesanan.TglPesanan"></InputDate>
+        <ValidationMessage For="@(() => pesanan.TglPesanan)"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Nama Customer</label>
+        <InputText class="form-control" @bind-Value="pesanan.NamaCustomer"></InputText>
+        <ValidationMessage For="@(() => pesanan.NamaCustomer)"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Menu Makanan</label>
+        <InputSelect class="form-select" @bind-Value="pesanan.IdMenuMakanan">
+            <option value="0">-- Select Menu --</option>
+            @foreach (var item in listMenuMakanan)
+            {
+                <option value="@item.IdMenuMakanan">@item.Nama</option>
+            }
+        </InputSelect>
+        <ValidationMessage For="@(() => pesanan.IdMenuMakanan)"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Jumlah/Porsi</label>
+        <InputNumber class="form-control" @bind-Value="pesanan.Jumlah"></InputNumber>
+        <ValidationMessage For="@(() => pesanan.Jumlah)"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Harga</label>
+        <InputNumber class="form-control" @bind-Value="pesanan.Harga"></InputNumber>
+        <ValidationMessage For="@(() => pesanan.Harga)"></ValidationMessage>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Total</label>
+        <InputNumber class="form-control" @bind-Value="pesanan.Total"></InputNumber>
+        <ValidationMessage For="@(() => pesanan.Total)"></ValidationMessage>
+    </div>
+
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public int idPesananEdit { get; set; } = 0;
+
+
+    string title = string.Empty;
+    string btnText = string.Empty;
+    PesananDTO pesanan = new PesananDTO();
+    List<MenuMakananDTO> listMenuMakanan = new List<MenuMakananDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        if(idPesananEdit != 0)
+        {
+            pesanan = await pesananService.Search(idPesananEdit);
+            btnText = "Update Pesanan";
+            title = "Edit Pesanan";
+        }
+        else
+        {
+            pesanan.TglPesanan = DateTime.Today;
+            btnText = "Save New Pesanan";
+            title = "New Pesanan";
+
+        }
+
+        listMenuMakanan = await menumakananService.List();
+    }
+
+    private async Task OnValidSubmit()
+    {
+        int generatedId = 0;
+        if (idPesananEdit == 0)
+            generatedId = await pesananService.Save(pesanan);
+        else
+            generatedId = await pesananService.Edit(pesanan);
+
+        if (generatedId != 0)
+            navigation.NavigateTo("/pesanans");
+    }
+
+}

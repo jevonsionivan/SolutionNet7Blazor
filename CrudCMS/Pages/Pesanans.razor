@@ -1,0 +1,58 @@
+﻿@page "/pesanans"
+@using CrudLibrary;
+@using CrudCMS.Services;
+@inject IPesananService pesananService;
+
+<h3>Pesanan</h3>
+
+<a class="btn btn-success btn-sm mb-3">New Pesanan</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>No. Pesanan</th>
+            <th>Tanggal Pesanan</th>
+            <th>Nama Customer</th>
+            <th>Menu Makanan</th>
+            <th>Jumlah/Porsi</th>
+            <th>Harga</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var item in listPesanan)
+        {
+            <tr>
+                <td>@item.NoPesanan</td>
+                <td>@item.TglPesanan.ToString("yyyy-mm-dd HH:mm:ss")</td>
+                <td>@item.NamaCustomer</td>
+                <td>@item.MenuMakananan!.Nama</td>
+                <td>@item.Jumlah</td>
+                <td>@item.Harga</td>
+                <td>@item.Total</td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="pesanan/@item.IdPesanan"><i class="oi oi-pencil"></i></a>
+                    <button type="button" class="btn btn-danger btn-sm ms-2" @onclick="(()=> DeletePesanan(item.IdPesanan))">
+                        <i class="oi oi-trash"></i>
+                    </button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@code {
+    List<PesananDTO> listPesanan = new List<PesananDTO>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        listPesanan = await pesananService.List();
+    }
+
+    private async Task DeletePesanan(int id)
+    {
+        var result = await pesananService.Delete(id);
+        if (result)
+            listPesanan = await pesananService.List();
+    }
+}

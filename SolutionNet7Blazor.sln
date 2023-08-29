@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.8.34004.107
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CrudAPI", "CrudAPI\CrudAPI.csproj", "{84F927A1-51FF-4478-8379-E8E0F7285AE3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudLibrary", "CrudLibrary\CrudLibrary.csproj", "{DB3B7376-9F24-431F-AFCB-F2ACCC7800DD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudCMS", "CrudCMS\CrudCMS.csproj", "{C9B0B8BC-1E0F-44EC-8DC3-58DED56C5A8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{84F927A1-51FF-4478-8379-E8E0F7285AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84F927A1-51FF-4478-8379-E8E0F7285AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84F927A1-51FF-4478-8379-E8E0F7285AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84F927A1-51FF-4478-8379-E8E0F7285AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DB3B7376-9F24-431F-AFCB-F2ACCC7800DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DB3B7376-9F24-431F-AFCB-F2ACCC7800DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DB3B7376-9F24-431F-AFCB-F2ACCC7800DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DB3B7376-9F24-431F-AFCB-F2ACCC7800DD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C9B0B8BC-1E0F-44EC-8DC3-58DED56C5A8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C9B0B8BC-1E0F-44EC-8DC3-58DED56C5A8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C9B0B8BC-1E0F-44EC-8DC3-58DED56C5A8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C9B0B8BC-1E0F-44EC-8DC3-58DED56C5A8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {72544B47-0BAF-4090-8740-1A06A6C5B041}
+	EndGlobalSection
+EndGlobal
